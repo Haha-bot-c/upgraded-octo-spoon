@@ -6,29 +6,14 @@ using System.Collections;
 public class Counter : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Text _counterText;
-    [SerializeField] private float _updateInterval = 0.5f; 
+    [SerializeField] private float _updateInterval = 0.5f;
+
     private bool _isCounting = false;
-    private float _timeSinceLastUpdate = 0f;
     private int _count = 0;
-    
 
     private void Start()
     {
         StartCoroutine(IncrementCounter());
-    }
-
-    private void Update()
-    {
-        if (_isCounting)
-        {
-            _timeSinceLastUpdate += Time.deltaTime;
-            if (_timeSinceLastUpdate >= _updateInterval)
-            {
-                _count++;
-                _timeSinceLastUpdate = 0f;
-                UpdateText();
-            }
-        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -38,7 +23,7 @@ public class Counter : MonoBehaviour, IPointerClickHandler
 
     private void UpdateText()
     {
-        _counterText.text = "Ñ÷åò÷èê: " + _count;
+        _counterText.text = "Ð¡Ñ‡ÐµÑ‚Ñ‡Ð¸Ðº: " + _count;
     }
 
     private IEnumerator IncrementCounter()
@@ -46,6 +31,7 @@ public class Counter : MonoBehaviour, IPointerClickHandler
         while (true)
         {
             yield return new WaitForSeconds(_updateInterval);
+
             if (_isCounting)
             {
                 _count++;
